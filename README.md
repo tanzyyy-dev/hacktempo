@@ -1,8 +1,8 @@
-# THE HOLLYWOOD HACKER v2.1 (猛烈打鍵！ハリウッド・ハッカー)
+# HACKTEMPO — サイバーリズム・タイピングアクション
 
 ドラマやハリウッド映画に登場する「キーボードを猛烈な勢いで叩いて何でも解決する天才ハッカー」になりきれる、ブラウザ向けサイバーリズム・タイピングアクションです。
 
-![The Hollywood Hacker v2.1](./public/ogp.png)
+![HACKTEMPO](./public/ogp.png)
 
 ---
 
@@ -92,6 +92,11 @@ v2.1 では、本格サイバー音源への対応、視認性を極限まで高
 - **外部依存ライブラリ**: ゼロ（ランタイム依存なし・ローカル完結）
 
 ---
+
+## 🔗 リンク
+
+- [ゲームをプレイ](https://tanzyyy-dev.github.io/hacktempo/)
+- [GitHub リポジトリ](https://github.com/tanzyyy-dev/hacktempo)
 
 ## 💻 起動方法
 

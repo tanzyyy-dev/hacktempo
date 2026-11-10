@@ -1,4 +1,4 @@
-// Web Audio API procedural BGM sequencer & SFX for THE HOLLYWOOD HACKER v2
+// Web Audio API procedural BGM sequencer & SFX for HACKTEMPO v2
 // The AudioContext clock is the single source of truth for gameplay timing,
 // so the music, the notes on screen, and hit judgments always stay in sync.
 

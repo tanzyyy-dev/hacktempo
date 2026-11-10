@@ -1,6 +1,6 @@
 # AGENTS.md - アーキテクチャとエージェント向け開発ガイド
 
-本ドキュメントは、AIコーディングエージェントおよび開発者が「THE HOLLYWOOD HACKER」の内部実装を迅速に把握・拡張するための設計仕様書です。
+本ドキュメントは、AIコーディングエージェントおよび開発者が「HACKTEMPO」の内部実装を迅速に把握・拡張するための設計仕様書です。
 
 ---
 
@@ -14,9 +14,9 @@
 ## 2. ディレクトリ構成
 
 ```
-hackhackhack/
+hacktempo/
 ├── index.html            # メインHTML（UIレイアウト、CRTオーバーレイ、ビートレーン、モーダル）
-├── package.json          # プロジェクト定義（Vite, TypeScript, v2.0.0）
+├── package.json          # プロジェクト定義（Vite, TypeScript, v2.1.0）
 ├── tsconfig.json         # TypeScript設定
 ├── README.md             # ユーザー向けドキュメント
 ├── AGENTS.md             # 本アーキテクチャガイド
@@ -89,7 +89,7 @@ hackhackhack/
 - **責務**: 結果画面の認定証（1200×675px）をCanvas APIで完全描画し、PNGとしてダウンロード。
 - **特徴**: ネオングロー、サイバーグリッド、枠線ブラケット、ランクバッジ、文字の自動折り返し描画を単一モジュールで完結。
 
-### `src/main.ts` (`HollywoodHackerGame`)
+### `src/main.ts` (`HacktempoGame`)
 - **責務**: アプリケーション全体のライフサイクル管理。
 - **状態遷移**: `START` → `PLAYING` → `FINISHED`
 - **入力ハンドリング**: `keydown`イベント（どのキーでもコードを前進・音声を再生）およびスマホ用の「RAPID HACK」タッチボタン。
@@ -118,7 +118,7 @@ npm run dev
 
 ## 6. UI・リズムノーツ視認性設計基準（デグレ防止ガイドライン）
 
-> 詳細な設計ルール定義は [ui-guidelines.md](file:///Users/ttan/dev/hackhackhack/.agents/rules/ui-guidelines.md) を参照のこと。
+> 詳細な設計ルール定義は [ui-guidelines.md](./.agents/rules/ui-guidelines.md) を参照のこと。
 
 今後の機能追加・UI改修において、以下の設計基準を絶対に崩さないこと：
 

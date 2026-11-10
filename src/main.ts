@@ -13,7 +13,7 @@ enum GameState {
   FINISHED
 }
 
-class HollywoodHackerGame {
+class HacktempoGame {
   private state: GameState = GameState.START;
   private selectedDifficulty: Difficulty = 'NORMAL';
   private durationTotal: number = 30; // 30 seconds
@@ -290,14 +290,14 @@ class HollywoodHackerGame {
       if (!this.currentMetrics) return;
       sound.init();
       sound.playLogBeep();
-      const text = `【THE HOLLYWOOD HACKER】ハッカー適性診断\n` +
+      const text = `【HACKTEMPO】ハッカー適性診断\n` +
         `ランク: ${this.currentMetrics.rank} (${this.currentMetrics.score.toLocaleString()} PTS)\n` +
         `称号: ${this.currentMetrics.title}\n` +
         `同期率: ${this.currentMetrics.syncRate}%\n` +
         `判定: PERFECT ${this.currentMetrics.perfectCount} / GREAT ${this.currentMetrics.greatCount} / MISS ${this.currentMetrics.missCount}\n` +
         `最高打鍵速度: ${this.currentMetrics.peakKps} Keys/s\n` +
         `寸評: ${this.currentMetrics.roast}\n` +
-        `#HollywoodHacker #ハッカー音ゲータイピング`;
+        `#HACKTEMPO #ハッカー音ゲータイピング`;
 
       navigator.clipboard.writeText(text).then(() => {
         this.showToast('📋 結果テキストをクリップボードにコピーしました！');
@@ -1086,5 +1086,5 @@ class HollywoodHackerGame {
 
 // Initialize on DOM load
 window.addEventListener('DOMContentLoaded', () => {
-  new HollywoodHackerGame();
+  new HacktempoGame();
 });

@@ -94,7 +94,7 @@ export function generateReportCardCanvas(metrics: TypingMetrics): HTMLCanvasElem
   // 5. Title & Game Name
   ctx.fillStyle = '#ffffff';
   ctx.font = '900 28px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-  ctx.fillText('THE HOLLYWOOD HACKER', margin + 30, margin + 110);
+  ctx.fillText('HACKTEMPO', margin + 30, margin + 110);
 
   // Difficulty badge on certificate
   const diff = metrics.difficulty || 'NORMAL';
@@ -239,10 +239,10 @@ export function generateReportCardCanvas(metrics: TypingMetrics): HTMLCanvasElem
   // 8. Footer Bar
   ctx.fillStyle = '#556677';
   ctx.font = '11px "Courier New", monospace';
-  ctx.fillText('VERIFIED BY: HOLLYWOOD MAINFRAME CYBER-SECURITY DIVISION // NO ACTUAL SYSTEM WAS HARMED', margin + 30, height - margin - 15);
+  ctx.fillText('VERIFIED BY: HACKTEMPO MAINFRAME CYBER-SECURITY DIVISION // NO ACTUAL SYSTEM WAS HARMED', margin + 30, height - margin - 15);
 
   ctx.textAlign = 'right';
-  ctx.fillText('#HollywoodHacker #ハッカータイピング', width - margin - 30, height - margin - 15);
+  ctx.fillText('#HACKTEMPO #ハッカータイピング', width - margin - 30, height - margin - 15);
 
   return canvas;
 }
@@ -269,7 +269,7 @@ export function downloadReportCard(metrics: TypingMetrics): void {
   const canvas = generateReportCardCanvas(metrics);
   const dataUrl = canvas.toDataURL('image/png');
   const link = document.createElement('a');
-  link.download = `hacker_report_${Date.now()}.png`;
+  link.download = `hacktempo_report_${Date.now()}.png`;
   link.href = dataUrl;
   document.body.appendChild(link);
   link.click();
@@ -288,14 +288,14 @@ export async function getReportCardBlob(metrics: TypingMetrics): Promise<Blob> {
 
 export async function shareReportCardToX(metrics: TypingMetrics): Promise<void> {
   const currentUrl = window.location.href;
-  const tweetText = `【THE HOLLYWOOD HACKER】ハッカー適性診断
+  const tweetText = `【HACKTEMPO】ハッカー適性診断
 ランク: ${metrics.rank} (${metrics.score.toLocaleString()} PTS)
 称号: ${metrics.title}
 同期率: ${metrics.syncRate}% | 最高速度: ${metrics.peakKps} Keys/s
 寸評: ${metrics.roast}
 
 映画風の猛烈打鍵＆サイバー音ゲーでハリウッドハッカーを体験せよ！
-#HollywoodHacker #ハッカー音ゲータイピング`;
+#HACKTEMPO #ハッカー音ゲータイピング`;
 
   // Try copying certificate image to clipboard so user can instantly paste (Ctrl+V) into the tweet
   try {

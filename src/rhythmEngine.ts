@@ -1,4 +1,4 @@
-// Cyber Rhythm & Timing Engine for Hollywood Hacker 2.0
+// Cyber Rhythm & Timing Engine for HACKTEMPO 2.0
 // Synchronized strictly to BPM 128 (1 beat = 0.46875s, 1 bar = 1.875s, 16 bars = 30.0s).
 // Supports Dual Highway (Top: SHIFT Lane, Bottom: MAIN Lane) with realistic typing cadences.
 

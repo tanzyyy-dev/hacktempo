@@ -1,7 +1,7 @@
 {
-  "name": "hackhackhack",
+  "name": "hacktempo",
   "version": "2.1.0",
-  "description": "ドラマ風ハッカータイピングゲーム - THE HOLLYWOOD HACKER",
+  "description": "ドラマ風ハッカータイピングゲーム - HACKTEMPO",
   "type": "module",
   "scripts": {
     "dev": "vite",
