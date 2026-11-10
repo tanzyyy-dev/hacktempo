@@ -1734,3 +1734,43 @@ html, body {
   #start-modal .btn-primary { width: 100%; font-size: 14px; padding: 14px 8px; }
   .howto-dialog { padding: 18px 14px; }
 }
+
+/* v3 result: clear header, key stats, optional details and sharing */
+#result-modal { padding: 8px; }
+#result-modal .modal-card { max-width: 640px; max-height: calc(100dvh - 16px); padding: clamp(14px,3vw,28px); overscroll-behavior: contain; }
+.result-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; min-height:32px; }
+#result-modal .modal-corner-back-btn { position:static; flex-shrink:0; }
+.result-version { color:#8296a5; font:10px var(--font-mono); }
+.result-heading .modal-title { font-size:clamp(22px,5vw,30px); margin-bottom:3px; }
+.result-heading .modal-subtitle { font-size:11px; margin-bottom:12px; }
+#result-modal .result-rank-container { gap:16px; margin:12px 0; }
+#result-modal .result-rank-badge { font-size:clamp(54px,10vw,72px); }
+#result-modal .result-score-num { font-size:clamp(22px,5vw,32px); }
+#result-modal .result-title-banner { font-size:clamp(13px,3.2vw,17px); padding:10px 12px; margin:12px 0; overflow-wrap:anywhere; }
+#result-modal .result-stats-grid { margin:12px 0; }
+#result-modal .result-stat-card { min-width:0; }
+#result-modal .stat-card-label { overflow-wrap:anywhere; }
+.result-details { margin-top:12px; }
+.result-details > summary { list-style:none; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border:1px solid rgba(0,229,255,.45); border-radius:6px; color:#c4e2f1; cursor:pointer; font:700 13px var(--font-sans); }
+.result-details > summary::-webkit-details-marker { display:none; }
+.result-details[open] > summary span { transform:rotate(180deg); }
+#result-modal .result-roast-box { margin:12px 0; font-size:13px; }
+#result-modal .result-action-primary { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:14px; }
+#result-modal .result-action-primary .result-bar-btn { width:100%; min-width:0; }
+#result-modal .result-action-primary .btn-retry { background:rgba(0,255,136,.16); border-color:#00ff88; color:#00ff88; }
+.result-share-options:not([hidden]) { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:10px; }
+.result-share-options[hidden] { display:none; }
+.result-share-options .result-bar-btn { font-size:12px; padding:0 12px; }
+@media(max-width:600px) {
+  #result-modal .modal-card { padding:14px 12px; }
+  #result-modal .result-heading .modal-title { font-size:22px; }
+  #result-modal .result-rank-container { flex-direction:column; gap:0; margin:10px 0; }
+  #result-modal .result-score-box { text-align:center; }
+  #result-modal .result-rank-badge { font-size:58px; line-height:1; }
+  #result-modal .result-score-num { font-size:26px; }
+  #result-modal .result-stats-grid { gap:8px; }
+  #result-modal .result-stat-card { padding:9px 8px; }
+  #result-modal .stat-card-label { font-size:10px; }
+  #result-modal .stat-card-val { font-size:19px; }
+  #result-modal .result-share-options .result-bar-btn { flex:1 1 130px; }
+}

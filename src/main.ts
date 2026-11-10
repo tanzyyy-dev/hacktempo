@@ -96,6 +96,9 @@ class HacktempoGame {
   private btnHowtoDone!: HTMLButtonElement;
   private btnDownloadPng!: HTMLButtonElement;
   private btnRestart!: HTMLButtonElement;
+  private btnOpenShare!: HTMLButtonElement;
+  private resultShareOptions!: HTMLElement;
+  private resultDetails!: HTMLDetailsElement;
   private btnModalBack!: HTMLButtonElement;
   private btnShareCopy!: HTMLButtonElement;
   private btnXShare!: HTMLButtonElement;
@@ -163,6 +166,9 @@ class HacktempoGame {
     this.btnHowtoDone = document.getElementById('btn-howto-done') as HTMLButtonElement;
     this.btnDownloadPng = document.getElementById('btn-download-png') as HTMLButtonElement;
     this.btnRestart = document.getElementById('btn-restart') as HTMLButtonElement;
+    this.btnOpenShare = document.getElementById('btn-open-share') as HTMLButtonElement;
+    this.resultShareOptions = document.getElementById('result-share-options')!;
+    this.resultDetails = document.getElementById('result-details') as HTMLDetailsElement;
     this.btnModalBack = document.getElementById('btn-modal-back') as HTMLButtonElement;
     this.btnShareCopy = document.getElementById('btn-share-copy') as HTMLButtonElement;
     this.btnXShare = document.getElementById('btn-x-share') as HTMLButtonElement;
@@ -275,6 +281,12 @@ class HacktempoGame {
         downloadReportCard(this.currentMetrics);
         this.showToast('📥 認定証PNG画像をダウンロードしました！');
       }
+    });
+
+    this.btnOpenShare.addEventListener('click', () => {
+      const expanded = this.btnOpenShare.getAttribute('aria-expanded') === 'true';
+      this.btnOpenShare.setAttribute('aria-expanded', String(!expanded));
+      this.resultShareOptions.hidden = expanded;
     });
 
     // Restart Button (Same Difficulty)
@@ -1032,6 +1044,9 @@ class HacktempoGame {
     entersEl.textContent = `${m.enterHits} 回`;
     roastEl.textContent = m.roast;
 
+    this.resultDetails.open = false;
+    this.resultShareOptions.hidden = true;
+    this.btnOpenShare.setAttribute('aria-expanded', 'false');
     this.resultModal.style.display = 'flex';
   }
 
