@@ -87,6 +87,7 @@
         </div>
 
         <div class="header-right">
+          <button id="btn-pause-game" class="btn-icon btn-pause-game" type="button" aria-label="ゲームを中断" title="ゲームを中断 (Esc)">⏸ 中断</button>
           <button id="btn-sound-toggle" class="btn-icon" title="音声ミュート切替">
             🔊 BGM & SFX: ON
           </button>
@@ -239,20 +240,31 @@
 
         <!-- Mobile Rhythm Buttons (スマホ時のみ表示) -->
         <div class="mobile-controls-row">
-          <button id="mobile-hack-btn" class="mobile-btn mobile-hack-btn">
+          <button id="mobile-hack-btn" type="button" class="mobile-btn mobile-hack-btn">
             ⚡ 連打
           </button>
-          <button id="mobile-space-btn" class="mobile-btn mobile-space-btn">
+          <button id="mobile-space-btn" type="button" class="mobile-btn mobile-space-btn">
             ␣ SPACE
           </button>
-          <button id="mobile-shift-btn" class="mobile-btn mobile-shift-btn">
+          <button id="mobile-shift-btn" type="button" class="mobile-btn mobile-shift-btn">
             ⇧ SHIFT
           </button>
-          <button id="mobile-enter-btn" class="mobile-btn mobile-enter-btn">
+          <button id="mobile-enter-btn" type="button" class="mobile-btn mobile-enter-btn">
             ↵ ENTER
           </button>
         </div>
       </footer>
+
+      <!-- Pause overlay -->
+      <div id="pause-overlay" class="pause-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="pause-title">
+        <div class="pause-card">
+          <h2 id="pause-title">PAUSED</h2>
+          <p>ミッションを一時中断しています</p>
+          <button type="button" id="btn-resume-game" class="pause-resume">▶ 再開する</button>
+          <button type="button" id="btn-quit-game" class="pause-quit">↩ ミッション選択に戻る</button>
+          <small>PCではEscキーでも再開できます</small>
+        </div>
+      </div>
 
       <!-- Start Screen Modal -->
       <div id="start-modal" class="modal-overlay">

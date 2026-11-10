@@ -156,6 +156,15 @@ class SoundManager {
     this.startSong();
   }
 
+  /** Freeze the Web Audio clock so BGM and note timing resume together. */
+  public async pauseTrack(): Promise<void> {
+    if (this.ctx?.state === 'running') await this.ctx.suspend();
+  }
+
+  public async resumeTrack(): Promise<void> {
+    if (this.ctx?.state === 'suspended') await this.ctx.resume();
+  }
+
   /** Gentle volume duck when entering result modal so player can admire their score while track finishes */
   public duckBgmForResults(): void {
     if (this.ctx && this.bgmBus) {

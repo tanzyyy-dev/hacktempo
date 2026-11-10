@@ -10,7 +10,8 @@ enum GameState {
   START,
   COUNTDOWN,
   PLAYING,
-  FINISHED
+  FINISHED,
+  PAUSED
 }
 
 class HacktempoGame {
@@ -110,6 +111,11 @@ class HacktempoGame {
   private mobileShiftBtn!: HTMLButtonElement;
   private mobileEnterBtn!: HTMLButtonElement;
   private mainTerminal!: HTMLElement;
+  private pauseOverlay!: HTMLElement;
+  private btnPauseGame!: HTMLButtonElement;
+  private btnResumeGame!: HTMLButtonElement;
+  private btnQuitGame!: HTMLButtonElement;
+  private pausedAt = 0;
 
   constructor() {
     this.bindDom();
@@ -180,6 +186,10 @@ class HacktempoGame {
     this.mobileShiftBtn = document.getElementById('mobile-shift-btn') as HTMLButtonElement;
     this.mobileEnterBtn = document.getElementById('mobile-enter-btn') as HTMLButtonElement;
     this.mainTerminal = document.getElementById('main-terminal')!;
+    this.pauseOverlay = document.getElementById('pause-overlay')!;
+    this.btnPauseGame = document.getElementById('btn-pause-game') as HTMLButtonElement;
+    this.btnResumeGame = document.getElementById('btn-resume-game') as HTMLButtonElement;
+    this.btnQuitGame = document.getElementById('btn-quit-game') as HTMLButtonElement;
   }
 
   private initRadar(): void {
@@ -231,8 +241,22 @@ class HacktempoGame {
       this.startCountdown();
     });
 
+    this.btnPauseGame.addEventListener('click', () => void this.pauseGame());
+    this.btnResumeGame.addEventListener('click', () => void this.resumeGame());
+    this.btnQuitGame.addEventListener('click', () => {
+      this.pauseOverlay.hidden = true;
+      this.resetGame();
+      this.startModal.style.display = 'flex';
+    });
+
     // Global Key Listener
     window.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && (this.state === GameState.PLAYING || this.state === GameState.PAUSED)) {
+        e.preventDefault();
+        if (this.state === GameState.PLAYING) void this.pauseGame();
+        else void this.resumeGame();
+        return;
+      }
       // Prevent browser default scrolling for space and tab during game
       if (this.state === GameState.PLAYING) {
         if (e.key === ' ' || e.key === 'Tab') {
@@ -265,15 +289,6 @@ class HacktempoGame {
       e.preventDefault();
       this.handleInputFromUi('Enter');
     });
-
-    // Touch tap on main terminal area for mobile furious tapping
-    this.mainTerminal.addEventListener('touchstart', (e) => {
-      if (this.state === GameState.PLAYING) {
-        e.preventDefault();
-        sound.init();
-        this.handleKeystroke('a');
-      }
-    }, { passive: false });
 
     // Download PNG
     this.btnDownloadPng.addEventListener('click', () => {
@@ -378,6 +393,32 @@ class HacktempoGame {
     if (this.timerDisplay) {
       this.timerDisplay.textContent = this.formatTime(this.timeLeft);
     }
+  }
+
+
+  private async pauseGame(): Promise<void> {
+    if (this.state !== GameState.PLAYING) return;
+    this.state = GameState.PAUSED;
+    this.pausedAt = performance.now();
+    if (this.timerIntervalId !== null) { clearInterval(this.timerIntervalId); this.timerIntervalId = null; }
+    if (this.animFrameId !== null) { cancelAnimationFrame(this.animFrameId); this.animFrameId = null; }
+    if (this.comboTimeoutId !== null) { clearTimeout(this.comboTimeoutId); this.comboTimeoutId = null; }
+    this.pauseOverlay.hidden = false;
+    try { await sound.pauseTrack(); } catch (err) { console.warn('Unable to suspend audio', err); }
+  }
+
+  private async resumeGame(): Promise<void> {
+    if (this.state !== GameState.PAUSED) return;
+    try { await sound.resumeTrack(); } catch (err) { console.warn('Unable to resume audio', err); }
+    if (this.state !== GameState.PAUSED) return;
+    const pauseDuration = performance.now() - this.pausedAt;
+    this.keyTimestamps = this.keyTimestamps.map(t => t + pauseDuration);
+    if (this.lastKeyTime) this.lastKeyTime += pauseDuration;
+    this.lastTimestamp = performance.now();
+    this.pauseOverlay.hidden = true;
+    this.state = GameState.PLAYING;
+    this.timerIntervalId = window.setInterval(() => this.updateTimer(), 50);
+    this.startRhythmRenderLoop();
   }
 
   private handleInputFromUi(key: string): void {
@@ -1065,6 +1106,7 @@ class HacktempoGame {
       this.countdownTimerId = null;
     }
     sound.stopTrack();
+    this.pauseOverlay.hidden = true;
 
     this.state = GameState.START;
     this.timeLeft = this.durationTotal;
