@@ -249,25 +249,33 @@ class HacktempoGame {
       this.startModal.style.display = 'flex';
     });
 
-    // Global Key Listener
+    // Keep browser shortcuts and non-game keys from interrupting active play.
+    // OS-reserved shortcuts cannot be intercepted by a web page.
     window.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && (this.state === GameState.PLAYING || this.state === GameState.PAUSED)) {
+      const active = this.state === GameState.PLAYING;
+      const paused = this.state === GameState.PAUSED;
+      if (!active && !paused) return;
+
+      // Esc always toggles pause, without reaching the scoring engine.
+      if (e.key === 'Escape') {
         e.preventDefault();
-        if (this.state === GameState.PLAYING) void this.pauseGame();
+        if (active) void this.pauseGame();
         else void this.resumeGame();
         return;
       }
-      // Prevent browser default scrolling for space and tab during game
-      if (this.state === GameState.PLAYING) {
-        if (e.key === ' ' || e.key === 'Tab') {
-          e.preventDefault();
-        }
-      }
 
-      if (this.state === GameState.PLAYING) {
-        this.handleKeystroke(e.key);
-      }
-    });
+      // While paused, do not process gameplay input. Keep dialog controls
+      // keyboard-accessible (Tab/Enter/Space) so users can resume or quit.
+      if (paused) return;
+
+      // Only printable characters and the three dedicated rhythm keys count.
+      // Ctrl/Alt/Meta combinations must never count as game keystrokes.
+      const isGameKey = !e.ctrlKey && !e.altKey && !e.metaKey &&
+        (e.key.length === 1 || e.key === 'Shift' || e.key === 'Enter');
+      e.preventDefault();
+      if (!isGameKey || e.isComposing) return;
+      this.handleKeystroke(e.key);
+    }, { capture: true });
 
     // Mobile buttons
     this.mobileHackBtn.addEventListener('click', (e) => {
