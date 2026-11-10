@@ -219,12 +219,6 @@ class HacktempoGame {
         }
       }
 
-      if (this.state === GameState.START) {
-        sound.init();
-        this.startCountdown();
-        return;
-      }
-
       if (this.state === GameState.PLAYING) {
         this.handleKeystroke(e.key);
       }
@@ -360,10 +354,7 @@ class HacktempoGame {
   }
 
   private handleInputFromUi(key: string): void {
-    if (this.state === GameState.START) {
-      sound.init();
-      this.startCountdown();
-    } else if (this.state === GameState.PLAYING) {
+    if (this.state === GameState.PLAYING) {
       this.handleKeystroke(key);
     }
   }
