@@ -90,6 +90,10 @@ class HacktempoGame {
   private resultModal!: HTMLElement;
   private btnSoundToggle!: HTMLButtonElement;
   private btnStartGame!: HTMLButtonElement;
+  private howtoDialog!: HTMLDialogElement;
+  private btnOpenHowto!: HTMLButtonElement;
+  private btnCloseHowto!: HTMLButtonElement;
+  private btnHowtoDone!: HTMLButtonElement;
   private btnDownloadPng!: HTMLButtonElement;
   private btnRestart!: HTMLButtonElement;
   private btnModalBack!: HTMLButtonElement;
@@ -153,6 +157,10 @@ class HacktempoGame {
     this.resultModal = document.getElementById('result-modal')!;
     this.btnSoundToggle = document.getElementById('btn-sound-toggle') as HTMLButtonElement;
     this.btnStartGame = document.getElementById('btn-start-game') as HTMLButtonElement;
+    this.howtoDialog = document.getElementById('howto-dialog') as HTMLDialogElement;
+    this.btnOpenHowto = document.getElementById('btn-open-howto') as HTMLButtonElement;
+    this.btnCloseHowto = document.getElementById('btn-close-howto') as HTMLButtonElement;
+    this.btnHowtoDone = document.getElementById('btn-howto-done') as HTMLButtonElement;
     this.btnDownloadPng = document.getElementById('btn-download-png') as HTMLButtonElement;
     this.btnRestart = document.getElementById('btn-restart') as HTMLButtonElement;
     this.btnModalBack = document.getElementById('btn-modal-back') as HTMLButtonElement;
@@ -203,6 +211,11 @@ class HacktempoGame {
         }
       });
     });
+
+    // Optional instructions dialog (Esc also closes a native dialog)
+    this.btnOpenHowto.addEventListener('click', () => this.howtoDialog.showModal());
+    this.btnCloseHowto.addEventListener('click', () => this.howtoDialog.close());
+    this.btnHowtoDone.addEventListener('click', () => this.howtoDialog.close());
 
     // Start Button
     this.btnStartGame.addEventListener('click', () => {

@@ -16,7 +16,7 @@
 ```
 hacktempo/
 ├── index.html            # メインHTML（UIレイアウト、CRTオーバーレイ、ビートレーン、モーダル）
-├── package.json          # プロジェクト定義（Vite, TypeScript, v2.1.0）
+├── package.json          # プロジェクト定義（Vite, TypeScript, v3.0.0）
 ├── tsconfig.json         # TypeScript設定
 ├── README.md             # ユーザー向けドキュメント
 ├── AGENTS.md             # 本アーキテクチャガイド
