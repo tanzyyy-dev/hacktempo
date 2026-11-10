@@ -343,29 +343,29 @@
 
           <div class="result-stats-grid result-stats-primary">
             <div class="result-stat-card">
-              <div class="stat-card-label">SYNC RATE (リズム同期率)</div>
+              <div class="stat-card-label"><span class="stat-label-main">SYNC RATE</span><span class="stat-label-sub">（リズム同期率）</span></div>
               <div id="stat-sync-rate" class="stat-card-val" style="color: #00ff88;">98%</div>
             </div>
             <div class="result-stat-card">
-              <div class="stat-card-label">PEAK SPEED (瞬間最高速度)</div>
+              <div class="stat-card-label"><span class="stat-label-main">PEAK SPEED</span><span class="stat-label-sub">（瞬間最高速度）</span></div>
               <div id="stat-peak-kps" class="stat-card-val">16.4 Keys/s</div>
             </div>
           </div>
           <details id="result-details" class="result-details"><summary>詳しい成績を見る <span aria-hidden="true">⌄</span></summary><div class="result-stats-grid result-stats-extra">
             <div class="result-stat-card">
-              <div class="stat-card-label">PERFECT / GREAT / GOOD</div>
+              <div class="stat-card-label"><span class="stat-label-main">PERFECT / GREAT / GOOD</span><span class="stat-label-sub" aria-hidden="true">&nbsp;</span></div>
               <div id="stat-rhythm-hits" class="stat-card-val">7 / 1 / 0</div>
             </div>
             <div class="result-stat-card">
-              <div class="stat-card-label">MISS / PENALTIES (ミス・誤打鍵)</div>
+              <div class="stat-card-label"><span class="stat-label-main">MISS / PENALTIES</span><span class="stat-label-sub">（ミス・誤打鍵）</span></div>
               <div id="stat-penalties" class="stat-card-val" style="color: #ff5577;">0 / 0</div>
             </div>
             <div class="result-stat-card">
-              <div class="stat-card-label">DRAMATIC PAUSE (劇的タメ)</div>
+              <div class="stat-card-label"><span class="stat-label-main">DRAMATIC PAUSE</span><span class="stat-label-sub">（劇的タメ）</span></div>
               <div id="stat-pauses" class="stat-card-val">2 回</div>
             </div>
             <div class="result-stat-card">
-              <div class="stat-card-label">ENTER SMASH (Enter強打)</div>
+              <div class="stat-card-label"><span class="stat-label-main">ENTER SMASH</span><span class="stat-label-sub">（Enter強打）</span></div>
               <div id="stat-enters" class="stat-card-val">8 回</div>
             </div>
             </div>
@@ -383,15 +383,20 @@
               </svg>
               <span>RETRY</span>
             </button>
-            <button type="button" id="btn-open-share" class="result-bar-btn btn-copy" aria-expanded="false" aria-controls="result-share-options">共有する</button>
+            <button type="button" id="btn-open-share" class="result-bar-btn btn-copy" aria-haspopup="dialog" aria-controls="result-share-options">共有する</button>
           </div>
-          <div id="result-share-options" class="result-share-options" hidden>
+        </div>
+      </div>
+
+          <dialog id="result-share-options" class="result-share-dialog" aria-labelledby="result-share-title">
+            <div class="result-share-header"><h2 id="result-share-title">結果を共有</h2><button type="button" id="btn-close-share" class="result-share-close" aria-label="共有ダイアログを閉じる">✕</button></div>
+            <p class="result-share-description">共有方法を選んでください</p>
             <button id="btn-share-copy" class="result-bar-btn btn-copy" title="結果テキストをクリップボードにコピー">
               <svg class="btn-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
               </svg>
-              <span>結果をCOPY</span>
+              <span>結果をコピー</span>
             </button>
             <button id="btn-download-png" class="result-bar-btn btn-dl" title="認定証PNG画像を保存">
               <svg class="btn-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -399,17 +404,15 @@
                 <polyline points="7 10 12 15 17 10"/>
                 <line x1="12" y1="15" x2="12" y2="3"/>
               </svg>
-              <span>認定証DL</span>
+              <span>認定証をダウンロード</span>
             </button>
             <button id="btn-x-share" class="result-bar-btn btn-x" title="X (Twitter) に認定証と定型文を投稿">
               <svg class="btn-glyph icon-x-svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
-              <span>POST</span>
+              <span>Xに投稿</span>
             </button>
-          </div>
-        </div>
-      </div>
+          </dialog>
 
       <!-- Cyber Toast Feedback Notification -->
       <div id="toast-notification" class="cyber-toast" style="display: none;"></div>

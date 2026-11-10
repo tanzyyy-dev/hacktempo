@@ -97,7 +97,8 @@ class HacktempoGame {
   private btnDownloadPng!: HTMLButtonElement;
   private btnRestart!: HTMLButtonElement;
   private btnOpenShare!: HTMLButtonElement;
-  private resultShareOptions!: HTMLElement;
+  private resultShareOptions!: HTMLDialogElement;
+  private btnCloseShare!: HTMLButtonElement;
   private resultDetails!: HTMLDetailsElement;
   private btnModalBack!: HTMLButtonElement;
   private btnShareCopy!: HTMLButtonElement;
@@ -167,7 +168,8 @@ class HacktempoGame {
     this.btnDownloadPng = document.getElementById('btn-download-png') as HTMLButtonElement;
     this.btnRestart = document.getElementById('btn-restart') as HTMLButtonElement;
     this.btnOpenShare = document.getElementById('btn-open-share') as HTMLButtonElement;
-    this.resultShareOptions = document.getElementById('result-share-options')!;
+    this.resultShareOptions = document.getElementById('result-share-options') as HTMLDialogElement;
+    this.btnCloseShare = document.getElementById('btn-close-share') as HTMLButtonElement;
     this.resultDetails = document.getElementById('result-details') as HTMLDetailsElement;
     this.btnModalBack = document.getElementById('btn-modal-back') as HTMLButtonElement;
     this.btnShareCopy = document.getElementById('btn-share-copy') as HTMLButtonElement;
@@ -283,10 +285,10 @@ class HacktempoGame {
       }
     });
 
-    this.btnOpenShare.addEventListener('click', () => {
-      const expanded = this.btnOpenShare.getAttribute('aria-expanded') === 'true';
-      this.btnOpenShare.setAttribute('aria-expanded', String(!expanded));
-      this.resultShareOptions.hidden = expanded;
+    this.btnOpenShare.addEventListener('click', () => this.resultShareOptions.showModal());
+    this.btnCloseShare.addEventListener('click', () => this.resultShareOptions.close());
+    this.resultShareOptions.addEventListener('click', (event) => {
+      if (event.target === this.resultShareOptions) this.resultShareOptions.close();
     });
 
     // Restart Button (Same Difficulty)
@@ -1045,8 +1047,7 @@ class HacktempoGame {
     roastEl.textContent = m.roast;
 
     this.resultDetails.open = false;
-    this.resultShareOptions.hidden = true;
-    this.btnOpenShare.setAttribute('aria-expanded', 'false');
+    if (this.resultShareOptions.open) this.resultShareOptions.close();
     this.resultModal.style.display = 'flex';
   }
 
